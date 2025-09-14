@@ -1,0 +1,30 @@
+{
+  "name": "teacher-dashboard",
+  "version": "1.0.0",
+  "description": "Teacher Dashboard Web Application with Attendance Management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "python-server": "python -m http.server 8000",
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "teacher",
+    "dashboard",
+    "attendance",
+    "education",
+    "school"
+  ],
+  "author": "Teacher Dashboard Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "rollNumber": "001",
+      "class": "10A",
+      "email": "john.doe@school.edu",
+      "phone": "+1234567890"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith", 
+      "rollNumber": "002",
+      "class": "10A",
+      "email": "jane.smith@school.edu",
+      "phone": "+1234567891"
+    },
+    {
+      "id": 3,
+      "name": "Mike Johnson",
+      "rollNumber": "003", 
+      "class": "10A",
+      "email": "mike.johnson@school.edu",
+      "phone": "+1234567892"
+    },
+    {
+      "id": 4,
+      "name": "Sarah Wilson",
+      "rollNumber": "004",
+      "class": "10A", 
+      "email": "sarah.wilson@school.edu",
+      "phone": "+1234567893"
+    },
+    {
+      "id": 5,
+      "name": "David Brown",
+      "rollNumber": "005",
+      "class": "10A",
+      "email": "david.brown@school.edu", 
+      "phone": "+1234567894"
+    },
+    {
+      "id": 6,
+      "name": "Emily Davis",
+      "rollNumber": "006",
+      "class": "10B",
+      "email": "emily.davis@school.edu",
+      "phone": "+1234567895"
+    },
+    {
+      "id": 7,
+      "name": "Robert Miller",
+      "rollNumber": "007",
+      "class": "10B",
+      "email": "robert.miller@school.edu",
+      "phone": "+1234567896"
+    },
+    {
+      "id": 8,
+      "name": "Lisa Anderson",
+      "rollNumber": "008", 
+      "class": "11A",
+      "email": "lisa.anderson@school.edu",
+      "phone": "+1234567897"
+    }
+  ],
+  "attendance_records": [
+    {
+      "id": 1,
+      "date": "2024-09-14",
+      "class": "10A",
+      "subject": "Mathematics",
+      "teacher_id": "T001",
+      "students": [
+        {"student_id": 1, "status": "present", "timestamp": "09:00:00"},
+        {"student_id": 2, "status": "present", "timestamp": "09:01:00"},
+        {"student_id": 3, "status": "absent", "timestamp": null},
+        {"student_id": 4, "status": "present", "timestamp": "09:02:00"},
+        {"student_id": 5, "status": "late", "timestamp": "09:15:00"}
+      ],
+      "notes": "Regular mathematics class - Chapter 5: Algebra"
+    },
+    {
+      "id": 2,
+      "date": "2024-09-13",
+      "class": "10A", 
+      "subject": "Science",
+      "teacher_id": "T001",
+      "students": [
+        {"student_id": 1, "status": "present", "timestamp": "10:00:00"},
+        {"student_id": 2, "status": "present", "timestamp": "10:00:00"},
+        {"student_id": 3, "status": "present", "timestamp": "10:01:00"},
+        {"student_id": 4, "status": "absent", "timestamp": null},
+        {"student_id": 5, "status": "present", "timestamp": "10:00:00"}
+      ],
+      "notes": "Physics - Newton's Laws of Motion"
+    },
+    {
+      "id": 3,
+      "date": "2024-09-12",
+      "class": "10B",
+      "subject": "English",
+      "teacher_id": "T001", 
+      "students": [
+        {"student_id": 6, "status": "present", "timestamp": "11:00:00"},
+        {"student_id": 7, "status": "present", "timestamp": "11:00:00"}
+      ],
+      "notes": "Literature - Shakespeare's Romeo and Juliet"
+    }
+  ],
+  "classes": [
+    {
+      "id": "10A",
+      "name": "Class 10A",
+      "total_students": 5,
+      "class_teacher": "T001",
+      "subjects": ["Mathematics", "Science", "English", "History", "Geography"]
+    },
+    {
+      "id": "10B", 
+      "name": "Class 10B",
+      "total_students": 2,
+      "class_teacher": "T001",
+      "subjects": ["Mathematics", "Science", "English", "History", "Geography"]
+    },
+    {
+      "id": "11A",
+      "name": "Class 11A", 
+      "total_students": 1,
+      "class_teacher": "T002",
+      "subjects": ["Mathematics", "Physics", "Chemistry", "Biology", "English"]
+    }
+  ],
+  "teachers": [
+    {
+      "id": "T001",
+      "name": "Riko Sapto Demo",
+      "email": "riko.sapto@school.edu",
+      "phone": "+1234567800",
+      "subjects": ["Mathematics", "Science", "English"],
+      "classes": ["10A", "10B"],
+      "profile_image": "assets/images/teacher.png"
+    },
+    {
+      "id": "T002", 
+      "name": "Dr. Smith Johnson",
+      "email": "smith.johnson@school.edu", 
+      "phone": "+1234567801",
+      "subjects": ["Physics", "Chemistry", "Biology"],
+      "classes": ["11A"],
+      "profile_image": "assets/images/teacher2.png"
+    }
+  ],
+  "subjects": [
+    {"id": "MATH", "name": "Mathematics", "code": "MTH"},
+    {"id": "SCI", "name": "Science", "code": "SCI"},
+    {"id": "ENG", "name": "English", "code": "ENG"},
+    {"id": "HIST", "name": "History", "code": "HIS"},
+    {"id": "GEO", "name": "Geography", "code": "GEO"},
+    {"id": "PHY", "name": "Physics", "code": "PHY"},
+    {"id": "CHEM", "name": "Chemistry", "code": "CHE"},
+    {"id": "BIO", "name": "Biology", "code": "BIO"}
+  ],
+  "settings": {
+    "school_name": "Upasthiti High School",
+    "academic_year": "2024-2025",
+    "timezone": "Asia/Kolkata",
+    "attendance_marking_deadline": "10:00:00",
+    "late_threshold_minutes": 15,
+    "notification_preferences": {
+      "email_notifications": true,
+      "browser_notifications": true,
+      "attendance_reminders": true
+    }
+  }
+}

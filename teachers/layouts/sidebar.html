@@ -1,0 +1,92 @@
+<!-- Left Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Upasthiti</span>
+        </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <!-- Main Navigation -->
+        <div class="nav-section">
+            <h3>Main</h3>
+            <ul>
+                <li class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" onclick="toggleSubmenu('attendance')">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Attendance</span>
+                    <i class="fas fa-chevron-down chevron"></i>
+                </li>
+                <!-- Attendance Submenu -->
+                <div class="submenu" id="attendanceSubmenu">
+                    <li class="nav-item submenu-item">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Mark Attendance</span>
+                    </li>
+                    <li class="nav-item submenu-item">
+                        <i class="fas fa-edit"></i>
+                        <span>Update Records</span>
+                    </li>
+                    <li class="nav-item submenu-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Monitor Progress</span>
+                    </li>
+                </div>
+                <li class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Assignments</span>
+                    <span class="badge">3</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Classes Section -->
+        <div class="nav-section">
+            <h3>My Classes</h3>
+            <ul>
+                <li class="nav-item class-item">
+                    <i class="fas fa-users"></i>
+                    <span>Class 10A</span>
+                    <span class="badge">25</span>
+                </li>
+                <li class="nav-item class-item">
+                    <i class="fas fa-users"></i>
+                    <span>Class 10B</span>
+                    <span class="badge">23</span>
+                </li>
+                <li class="nav-item class-item">
+                    <i class="fas fa-users"></i>
+                    <span>Class 11A</span>
+                    <span class="badge">28</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="nav-section">
+            <h3>Quick Actions</h3>
+            <ul>
+                <li class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Start Timer</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Send Notice</span>
+                </li>
+                <li class="nav-item">
+                    <i class="fas fa-download"></i>
+                    <span>Export Data</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
