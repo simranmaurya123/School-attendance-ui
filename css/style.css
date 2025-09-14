@@ -1,0 +1,96 @@
+/* Main Styles */
+:root {
+    --primary-color: #6B4CE6;
+    --secondary-color: #8F7EF3;
+    --background-color: #F8F9FD;
+    --text-color: #333;
+    --gray-light: #F0F2F5;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-bar input {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-light);
+    width: 300px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Dashboard Content Layout */
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+.main-content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.new-courses, .my-courses {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+}
