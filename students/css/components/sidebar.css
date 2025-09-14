@@ -1,0 +1,43 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--white);
+    padding: 2rem;
+    border-right: 1px solid var(--gray-light);
+}
+
+.logo {
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    margin-bottom: 1rem;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.nav-links .icon {
+    margin-right: 1rem;
+}
+
+.nav-links li.active a {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.nav-links a:hover {
+    background-color: var(--gray-light);
+}

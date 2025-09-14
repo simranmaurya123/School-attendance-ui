@@ -1,0 +1,49 @@
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.profile-pic {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #F8F9FD;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.profile-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background-color: #6B4CE6;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    margin-top: 1px;
+}
+
+.profile-designation {
+    color: #6B7280;
+    font-size: 0.8rem;
+    display: block;
+    width: 100%;
+    margin-top: -2px;
+}
