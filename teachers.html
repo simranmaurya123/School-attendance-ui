@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers - Upasthiti Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components/sidebar.css">
+    <link rel="stylesheet" href="css/components/teachers.css">
+    <link rel="stylesheet" href="css/components/notifications.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Upasthiti</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><span class="icon">📊</span>Dashboard</a></li>
+                <li><a href="calendar.html"><span class="icon">📅</span>Calendar</a></li>
+                <li class="active"><a href="teachers.html"><span class="icon">👩‍🏫</span>Teachers</a></li>
+                <li><a href="timetable.html"><span class="icon">🗓️</span>Time Table</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+            </header>
+
+            <!-- Teachers Content -->
+            <section class="teachers-content">
+                <div class="teachers-header">
+                    <h1>Faculty Members</h1>
+                    <p>Get in touch with your teachers and faculty members</p>
+                </div>
+
+                <!-- Teachers Grid -->
+                <div class="teachers-grid" id="teachersGrid">
+                    <!-- Teachers will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/components/notifications.js"></script>
+    <script src="js/components/teachers.js"></script>
+    <script>
+        // Initialize components
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeNotifications();
+            initializeTeachers();
+        });
+    </script>
+</body>
+</html>

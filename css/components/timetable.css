@@ -1,0 +1,269 @@
+/* Timetable Page Styles */
+
+.timetable-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.timetable-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.timetable-header h1 {
+    font-size: 2rem;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Timetable Grid */
+.timetable-container {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.timetable-grid {
+    display: grid;
+    grid-template-columns: 150px repeat(6, 1fr);
+    gap: 1px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 1000px;
+}
+
+/* Time Header */
+.time-header {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: center;
+    border-right: 2px solid #e0e0e0;
+}
+
+.time-slot {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Day Labels */
+.day-label {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
+    border-right: 2px solid #e0e0e0;
+}
+
+/* Subject Cards */
+.subject-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 0.8rem;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.subject-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.subject-code {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+.teacher-name {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+}
+
+.room {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Subject Color Coding */
+.subject-card.cs {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.subject-card.math {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.subject-card.physics {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+.subject-card.chemistry {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+/* Empty Slots */
+.empty-slot {
+    background-color: #f9f9f9;
+    min-height: 80px;
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .timetable-container {
+        padding: 1rem;
+    }
+    
+    .timetable-grid {
+        grid-template-columns: 120px repeat(6, 1fr);
+    }
+    
+    .subject-card {
+        padding: 0.6rem;
+        min-height: 70px;
+    }
+    
+    .subject-code {
+        font-size: 0.9rem;
+    }
+    
+    .teacher-name {
+        font-size: 0.75rem;
+    }
+    
+    .room {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .timetable-content {
+        padding: 0.5rem;
+    }
+    
+    .timetable-container {
+        padding: 0.5rem;
+    }
+    
+    .timetable-grid {
+        grid-template-columns: 100px repeat(6, 1fr);
+        gap: 0.5px;
+    }
+    
+    .time-slot {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .day-label {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .subject-card {
+        padding: 0.4rem;
+        min-height: 60px;
+    }
+    
+    .subject-code {
+        font-size: 0.8rem;
+    }
+    
+    .teacher-name {
+        font-size: 0.7rem;
+    }
+    
+    .room {
+        font-size: 0.65rem;
+    }
+    
+    .timetable-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timetable-grid {
+        grid-template-columns: 80px repeat(6, 1fr);
+    }
+    
+    .time-slot {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        padding: 0.3rem;
+    }
+    
+    .day-label {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        padding: 0.3rem;
+    }
+}
