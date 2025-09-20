@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance - Select Class</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/attendance.css">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d5016 0%, #4CAF50 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: rgba(76, 175, 80, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .class-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #2d5016);
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .class-info {
+            margin-bottom: 15px;
+        }
+
+        .class-icon {
+            background: linear-gradient(135deg, #4CAF50, #2d5016);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .class-details h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .class-details p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .class-stats {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+            max-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4CAF50;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .mark-button {
+            background: linear-gradient(135deg, #4CAF50, #2d5016);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .mark-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .no-classes {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+
+        .no-classes i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .classes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .class-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="teacher-dashboard.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Dashboard → Mark Attendance
+        </a>
+
+        <div class="header">
+            <h1>Mark Attendance</h1>
+            <p>Select a class to mark attendance for today's session</p>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search classes..." id="searchClasses">
+        </div>
+
+        <div class="classes-grid" id="classesGrid">
+            <!-- Classes will be loaded here by JavaScript -->
+        </div>
+
+        <div class="no-classes" id="noClasses" style="display: none;">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>No Classes Found</h3>
+            <p>No classes match your search criteria</p>
+        </div>
+    </div>
+
+    <script>
+        // Sample classes data - in real app, this would come from a database
+        const classesData = [
+            {
+                id: 'class_10a_math',
+                name: 'Class 10-A Mathematics',
+                subject: 'Mathematics',
+                section: '10-A',
+                time: '09:00 - 10:00 AM',
+                students: 32,
+                lastAttendance: '95%',
+                room: 'Room 101'
+            },
+            {
+                id: 'class_10b_math',
+                name: 'Class 10-B Mathematics',
+                subject: 'Mathematics',
+                section: '10-B',
+                time: '10:30 - 11:30 AM',
+                students: 28,
+                lastAttendance: '87%',
+                room: 'Room 102'
+            },
+            {
+                id: 'class_9a_math',
+                name: 'Class 9-A Mathematics',
+                subject: 'Mathematics',
+                section: '9-A',
+                time: '12:00 - 01:00 PM',
+                students: 30,
+                lastAttendance: '92%',
+                room: 'Room 103'
+            },
+            {
+                id: 'class_11a_math',
+                name: 'Class 11-A Mathematics',
+                subject: 'Mathematics',
+                section: '11-A',
+                time: '02:00 - 03:00 PM',
+                students: 25,
+                lastAttendance: '89%',
+                room: 'Room 105'
+            },
+            {
+                id: 'class_12a_math',
+                name: 'Class 12-A Mathematics',
+                subject: 'Mathematics',
+                section: '12-A',
+                time: '03:30 - 04:30 PM',
+                students: 22,
+                lastAttendance: '96%',
+                room: 'Room 201'
+            },
+            {
+                id: 'class_8a_math',
+                name: 'Class 8-A Mathematics',
+                subject: 'Mathematics',
+                section: '8-A',
+                time: '11:00 - 12:00 PM',
+                students: 35,
+                lastAttendance: '83%',
+                room: 'Room 104'
+            }
+        ];
+
+        function renderClasses(classes = classesData) {
+            const grid = document.getElementById('classesGrid');
+            const noClasses = document.getElementById('noClasses');
+
+            if (classes.length === 0) {
+                grid.style.display = 'none';
+                noClasses.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noClasses.style.display = 'none';
+
+            grid.innerHTML = classes.map(classData => `
+                <div class="class-card" onclick="selectClass('${classData.id}')">
+                    <div class="class-info">
+                        <div class="class-details">
+                            <h3>${classData.name}</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="class-stats">
+                        <div class="stat">
+                            <span class="stat-number">${classData.students}</span>
+                            <div class="stat-label">Students</div>
+                        </div>
+                    </div>
+                    
+                    <button class="mark-button" onclick="event.stopPropagation(); selectClass('${classData.id}')">
+                        Mark Attendance
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function getSubjectIcon(subject) {
+            // All subjects are Mathematics now, so return calculator icon
+            return 'calculator';
+        }
+
+        function selectClass(classId) {
+            // Store selected class in sessionStorage
+            const selectedClass = classesData.find(c => c.id === classId);
+            sessionStorage.setItem('selectedClass', JSON.stringify(selectedClass));
+            
+            // Navigate to mark attendance page
+            window.location.href = `mark-attendance.html?class=${classId}`;
+        }
+
+        function searchClasses() {
+            const searchTerm = document.getElementById('searchClasses').value.toLowerCase();
+            const filteredClasses = classesData.filter(classData => 
+                classData.name.toLowerCase().includes(searchTerm) ||
+                classData.subject.toLowerCase().includes(searchTerm) ||
+                classData.section.toLowerCase().includes(searchTerm)
+            );
+            renderClasses(filteredClasses);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderClasses();
+            
+            // Add search functionality
+            document.getElementById('searchClasses').addEventListener('input', searchClasses);
+        });
+    </script>
+</body>
+</html>

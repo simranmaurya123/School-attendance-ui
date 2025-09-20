@@ -1,0 +1,128 @@
+/* Dashboard Calendar Widget Styles */
+.dashboard-calendar-widget {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 280px;
+}
+
+.dashboard-calendar-container {
+    width: 100%;
+}
+
+.dashboard-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dashboard-calendar-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1rem;
+    padding: 0.3rem;
+    border-radius: 4px;
+}
+
+.dashboard-calendar-header button:hover {
+    background-color: var(--gray-light);
+}
+
+.dashboard-calendar-header h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dashboard-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.1rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.dashboard-calendar-weekday {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+    font-weight: 600;
+    padding: 0.3rem 0;
+    width: 100%;
+}
+
+.dashboard-calendar-day {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.dashboard-calendar-day:hover {
+    background-color: var(--gray-light);
+    transform: scale(1.05);
+}
+
+.dashboard-calendar-day.other-month {
+    color: #ccc;
+    font-size: 0.7rem;
+}
+
+/* Attendance Highlighting */
+.dashboard-calendar-day.present {
+    background-color: #10B981 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.dashboard-calendar-day.absent {
+    background-color: #EF4444 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+/* Today takes priority over attendance colors */
+.dashboard-calendar-day.today {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 4px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Event Preview */
+.event-preview {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-light);
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}

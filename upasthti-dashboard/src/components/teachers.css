@@ -1,0 +1,248 @@
+/* Teachers Page Styles */
+
+.teachers-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.teachers-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.teachers-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.teachers-header p {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+/* Filter Section */
+.filter-section {
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--gray-light);
+    background-color: var(--white);
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Teachers List - Wider Horizontal Bars */
+.teachers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Teacher Bar - Wider Layout with Larger Fonts */
+.teacher-bar {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    width: 100%;
+}
+
+.teacher-bar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Teacher Details - Vertical Stack Layout */
+.teacher-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.teacher-name-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.teacher-name {
+    font-size: 5rem;
+    font-weight: 1000;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.teacher-subject {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Contact Information - Vertical Stack */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1rem;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: #666;
+    min-width: 80px;
+}
+
+.contact-value {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+/* Department Badge */
+.department-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.teacher-card {
+    position: relative;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.empty-state h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .teachers-header h1 {
+        font-size: 2rem;
+    }
+    
+    .teacher-bar {
+        padding: 1.2rem 1.5rem;
+        min-height: auto;
+    }
+    
+    .teacher-name-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .teacher-name {
+        font-size: 5 rem;
+    }
+    
+    .contact-item {
+        font-size: 0.9rem;
+    }
+    
+    .contact-label {
+        min-width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .teacher-bar {
+        padding: 1rem;
+    }
+    
+    .teachers-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .teachers-header p {
+        font-size: 1rem;
+    }
+    
+    .teacher-name {
+        font-size: 5 rem;
+    }
+    
+    .contact-item {
+        font-size: 0.85rem;
+    }
+    
+    .contact-label {
+        min-width: 60px;
+    }
+    
+    .teacher-info-stack {
+        gap: 0.6rem;
+    }
+}

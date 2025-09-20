@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Attendance - Attendance Records</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .breadcrumb-container {
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-box {
+            background: linear-gradient(135deg, #4CAF50, #2d5016);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d5016 0%, #4CAF50 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .page-subtitle {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .search-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box, .date-filter, .class-filter {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box:focus, .date-filter:focus, .class-filter:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .records-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .records-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .record-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .record-item:last-child {
+            border-bottom: none;
+        }
+
+        .record-item:hover {
+            background: #f8f9fa;
+        }
+
+        .record-info {
+            flex: 1;
+        }
+
+        .record-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 8px 0;
+        }
+
+        .record-details {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .record-stats {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .stat-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-present {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .stat-absent {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .stat-total {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .update-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .update-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .empty-message {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .filters-active {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .search-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box, .date-filter, .class-filter {
+                width: 100%;
+            }
+            
+            .record-details {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .record-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb-container">
+            <div class="breadcrumb-box" onclick="window.location.href='teacher-dashboard.html'">
+                <span>Home → Update Attendance</span>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1 class="page-title">Update Attendance</h1>
+            <p class="page-subtitle">Modify previously saved attendance records</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-controls">
+                <input type="text" class="search-box" placeholder="Search by class name..." id="searchRecords">
+                <input type="date" class="date-filter" id="dateFilter">
+                <select class="class-filter" id="classFilter">
+                    <option value="">All Classes</option>
+                    <option value="class_10a_math">Class 10-A Mathematics</option>
+                    <option value="class_10b_math">Class 10-B Mathematics</option>
+                    <option value="class_9a_math">Class 9-A Mathematics</option>
+                    <option value="class_9b_math">Class 9-B Mathematics</option>
+                </select>
+            </div>
+            <div id="filtersActive" class="filters-active" style="display: none;">
+                Filters applied. <a href="#" onclick="clearFilters()" style="color: #2e7d32; text-decoration: underline;">Clear all</a>
+            </div>
+        </div>
+
+        <div class="records-list">
+            <div class="records-header">
+                <span id="recordsCount">Loading attendance records...</span>
+            </div>
+            <div id="recordsList">
+                <!-- Records will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let attendanceRecords = [];
+        let filteredRecords = [];
+
+        function initializePage() {
+            console.log('Initializing update attendance page...');
+            loadAttendanceRecords();
+            setupEventListeners();
+            console.log('Page initialized with', attendanceRecords.length, 'records');
+        }
+
+        function loadAttendanceRecords() {
+            // Always generate sample data for testing
+            attendanceRecords = generateSampleRecords();
+            
+            // Also try to load from localStorage and merge
+            try {
+                const savedRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '[]');
+                if (savedRecords.length > 0) {
+                    // Merge saved records with sample data, avoiding duplicates
+                    savedRecords.forEach(saved => {
+                        if (!attendanceRecords.find(record => record.id === saved.id)) {
+                            attendanceRecords.push(saved);
+                        }
+                    });
+                }
+                localStorage.setItem('attendanceRecords', JSON.stringify(attendanceRecords));
+            } catch (error) {
+                console.log('Error loading saved records:', error);
+            }
+
+            filteredRecords = [...attendanceRecords];
+            renderRecords();
+        }
+
+        function generateSampleRecords() {
+            const sampleRecords = [];
+            const classes = [
+                { id: 'class_10a_math', name: 'Class 10-A Mathematics' },
+                { id: 'class_10b_math', name: 'Class 10-B Mathematics' },
+                { id: 'class_9a_math', name: 'Class 9-A Mathematics' },
+                { id: 'class_9b_math', name: 'Class 9-B Mathematics' }
+            ];
+
+            const dates = [
+                '2025-09-20',
+                '2025-09-19',
+                '2025-09-18',
+                '2025-09-17',
+                '2025-09-16'
+            ];
+
+            // Generate fixed data for consistent testing
+            classes.forEach((classInfo, classIndex) => {
+                dates.forEach((date, dateIndex) => {
+                    const totalStudents = classInfo.id.includes('10a') ? 10 : 5;
+                    // Use fixed values instead of random for consistent testing
+                    const presentCount = Math.max(1, totalStudents - (dateIndex % 3));
+                    const absentCount = totalStudents - presentCount;
+
+                    sampleRecords.push({
+                        id: `${classInfo.id}_${date.replace(/-/g, '')}`,
+                        classId: classInfo.id,
+                        className: classInfo.name,
+                        date: date,
+                        time: new Date(date + 'T07:18:00').toISOString(),
+                        summary: {
+                            total: totalStudents,
+                            present: presentCount,
+                            absent: absentCount,
+                            rate: Math.round((presentCount / totalStudents) * 100)
+                        },
+                        attendance: {} // Would contain individual student attendance
+                    });
+                });
+            });
+
+            return sampleRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+
+        function renderRecords() {
+            const container = document.getElementById('recordsList');
+            const countElement = document.getElementById('recordsCount');
+
+            if (filteredRecords.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <div class="empty-title">No attendance records found</div>
+                        <div class="empty-message">
+                            ${attendanceRecords.length === 0 
+                                ? 'No attendance has been marked yet. Start by marking attendance for your classes.'
+                                : 'No records match your current filters. Try adjusting your search criteria.'
+                            }
+                        </div>
+                    </div>
+                `;
+                countElement.textContent = 'No records found';
+                return;
+            }
+
+            countElement.textContent = `${filteredRecords.length} attendance record${filteredRecords.length !== 1 ? 's' : ''} found`;
+
+            container.innerHTML = filteredRecords.map(record => `
+                <div class="record-item" onclick="updateAttendance('${record.id}')">
+                    <div class="record-info">
+                        <div class="record-title">${record.className}</div>
+                        <div class="record-details">
+                            <span>${formatDate(record.date)}</span>
+                            <span>${formatTime(record.time)}</span>
+                        </div>
+                    </div>
+                    <div class="record-stats">
+                        <span class="stat-badge stat-present">${record.summary.present} Present</span>
+                        <span class="stat-badge stat-absent">${record.summary.absent} Absent</span>
+                        <span class="stat-badge stat-total">${record.summary.total} Total</span>
+                        <button class="update-btn" onclick="event.stopPropagation(); updateAttendance('${record.id}')">
+                            Update
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short',
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function formatTime(timeString) {
+            const time = new Date(timeString);
+            return time.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit'
+            });
+        }
+
+        function updateAttendance(recordId) {
+            console.log('Updating attendance for record:', recordId);
+            const record = attendanceRecords.find(r => r.id === recordId);
+            if (!record) {
+                alert('Record not found!');
+                console.error('Record not found:', recordId);
+                return;
+            }
+
+            console.log('Found record:', record);
+            // Store the record to update in sessionStorage
+            sessionStorage.setItem('updateRecord', JSON.stringify(record));
+            
+            // Redirect to update page
+            window.location.href = 'edit-attendance.html';
+        }
+
+        function setupEventListeners() {
+            document.getElementById('searchRecords').addEventListener('input', applyFilters);
+            document.getElementById('dateFilter').addEventListener('change', applyFilters);
+            document.getElementById('classFilter').addEventListener('change', applyFilters);
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchRecords').value.toLowerCase();
+            const dateFilter = document.getElementById('dateFilter').value;
+            const classFilter = document.getElementById('classFilter').value;
+
+            filteredRecords = attendanceRecords.filter(record => {
+                const matchesSearch = record.className.toLowerCase().includes(searchTerm);
+                const matchesDate = !dateFilter || record.date === dateFilter;
+                const matchesClass = !classFilter || record.classId === classFilter;
+                
+                return matchesSearch && matchesDate && matchesClass;
+            });
+
+            renderRecords();
+            updateFiltersIndicator();
+        }
+
+        function updateFiltersIndicator() {
+            const searchTerm = document.getElementById('searchRecords').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            const classFilter = document.getElementById('classFilter').value;
+            const indicator = document.getElementById('filtersActive');
+
+            const hasFilters = searchTerm || dateFilter || classFilter;
+            indicator.style.display = hasFilters ? 'block' : 'none';
+        }
+
+        function clearFilters() {
+            document.getElementById('searchRecords').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('classFilter').value = '';
+            applyFilters();
+        }
+
+        // Initialize page when loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
