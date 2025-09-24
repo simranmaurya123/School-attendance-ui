@@ -69,6 +69,11 @@ const Teachers = () => {
       
       <main className="main-content">
         <header className="dashboard-header">
+          <nav className="breadcrumb">
+            <a href="/"> Home</a>
+            <span>›</span>
+            <span>Teachers</span>
+          </nav>
         </header>
 
         <section className="teachers-content">

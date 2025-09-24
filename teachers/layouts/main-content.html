@@ -1,38 +1,36 @@
 <!-- Main Dashboard Content -->
 <main class="main-content">
-    <!-- Stats Cards Section -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card card-classes">
-                <div class="stat-content">
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Total Classes Taken</div>
-                    <div class="stat-period">This Week</div>
+    <!-- Quick Actions Section -->
+    <section class="quick-actions-section">
+        <h2 class="section-heading">Quick Actions</h2>
+        <div class="action-cards">
+            <div class="action-card mark-attendance" onclick="window.location.href='mark-attendance.html'">
+                <div class="action-icon">
+                    <i class="fas fa-user-check"></i>
                 </div>
-                <div class="stat-icon">
-                    <i class="fas fa-books"></i>
-                </div>
-            </div>
-            
-            <div class="stat-card card-attendance">
-                <div class="stat-content">
-                    <div class="stat-number">94%</div>
-                    <div class="stat-label">Students Present Today</div>
-                    <div class="stat-change">+3% from yesterday</div>
-                </div>
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
+                <div class="action-content">
+                    <h3>Mark Attendance</h3>
+                    <p>Record student attendance for today's classes</p>
                 </div>
             </div>
             
-            <div class="stat-card card-hours">
-                <div class="stat-content">
-                    <div class="stat-number">26h 45m</div>
-                    <div class="stat-label">Total Teaching Hours</div>
-                    <div class="stat-period">This Month</div>
+            <div class="action-card update-attendance" onclick="window.location.href='update-attendance.html'">
+                <div class="action-icon">
+                    <i class="fas fa-edit"></i>
                 </div>
-                <div class="stat-icon">
-                    <i class="fas fa-clock"></i>
+                <div class="action-content">
+                    <h3>Update Attendance</h3>
+                    <p>Modify existing attendance records</p>
+                </div>
+            </div>
+            
+            <div class="action-card notice" onclick="window.location.href='notices.html'">
+                <div class="action-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="action-content">
+                    <h3>Notice</h3>
+                    <p>Create and manage notices for students</p>
                 </div>
             </div>
         </div>

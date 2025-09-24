@@ -3,704 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard - Upasthiti</title>
+    <title>Teacher Dashboard - UPASतिथि</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Modular CSS Files -->
+    <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link rel="stylesheet" href="assets/css/rightpanel.css">
-</head>
-<body>
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Left Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Upasthiti</span>
-                </div>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <h3>Home</h3>
-                <ul>
-                    <li class="nav-item active">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </li>
-                    <li class="nav-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Report Overview</span>
-                        <span class="badge">1</span>
-                    </li>
-                    <li class="nav-item">
-                        <i class="fas fa-images"></i>
-                        <span>Images</span>
-                    </li>
-                    <li class="nav-item">
-                        <i class="fas fa-tasks"></i>
-                        <span>Manage Task</span>
-                    </li>
-                </ul>
-
-                <h3>Attendance</h3>
-                <ul>
-                    <li class="nav-item">
-                        <i class="fas fa-user-check"></i>
-                        <span>Mark Attendance</span>
-                    </li>
-                    <li class="nav-item">
-                        <i class="fas fa-edit"></i>
-                        <span>Update Attendance</span>
-                    </li>
-                    <li class="nav-item">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Monitor Attendance</span>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Stats Cards -->
-            <div class="stats-section">
-                <div class="stat-card card1">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">Total Classes Today</div>
-                    <div class="stat-change">+2 from yesterday</div>
-                    <div class="stat-icon">📚</div>
-                </div>
-                
-                <div class="stat-card card2">
-                    <div class="stat-number">92%</div>
-                    <div class="stat-label">Students Present Today</div>
-                    <div class="stat-change">85% average</div>
-                    <div class="stat-icon">👥</div>
-                </div>
-                
-                <div class="stat-card card3">
-                    <div class="stat-number">28h</div>
-                    <div class="stat-label">Teaching Hours This Week</div>
-                    <div class="stat-icon">⏰</div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Right Panel -->
-        <aside class="right-panel">
-            <!-- Teacher Profile -->
-            <div class="profile-section">
-                <div class="profile-header">
-                    <div class="profile-info">
-                        <img src="assets/images/teacher-pfp.jpg" alt="Teacher" class="profile-image">
-                        <span class="teacher-name">Richa Sharma</span>
-                        <span class="teacher-id">ID: T0191</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mini Calendar -->
-            <div class="calendar-section">
-                <div class="calendar-header">
-                    <h3 id="calendar-month-year">September 2025</h3>
-                    <div class="calendar-nav">
-                        <button id="prev-month">‹</button>
-                        <button id="next-month">›</button>
-                    </div>
-                </div>
-                <div class="calendar-grid">
-                    <div class="calendar-day-header">S</div>
-                    <div class="calendar-day-header">M</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">W</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">F</div>
-                    <div class="calendar-day-header">S</div>
-                </div>
-                <div class="calendar-days" id="calendar-days"></div>
-            </div>
-        </aside>
-    </div>
-
-    <!-- Modular JavaScript Files -->
-    <script src="js/main.js"></script>
-    <script src="js/notifications.js"></script>
-    <script>
-        // Mini Calendar Functionality
-        class MiniCalendar {
-            constructor() {
-                this.currentDate = new Date();
-                this.today = new Date();
-                this.init();
-            }
-
-            init() {
-                this.render();
-                this.bindEvents();
-            }
-
-            bindEvents() {
-                document.getElementById('prev-month').addEventListener('click', () => {
-                    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-                    this.render();
-                });
-
-                document.getElementById('next-month').addEventListener('click', () => {
-                    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-                    this.render();
-                });
-            }
-
-            render() {
-                const monthNames = [
-                    'January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'
-                ];
-
-                // Update header
-                const monthYear = document.getElementById('calendar-month-year');
-                monthYear.textContent = `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
-
-                // Get first day of month and number of days
-                const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
-                const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
-                const startDate = new Date(firstDay);
-                startDate.setDate(startDate.getDate() - firstDay.getDay());
-
-                // Generate calendar days
-                const daysContainer = document.getElementById('calendar-days');
-                daysContainer.innerHTML = '';
-
-                for (let i = 0; i < 42; i++) {
-                    const date = new Date(startDate);
-                    date.setDate(startDate.getDate() + i);
-
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day';
-                    dayElement.textContent = date.getDate();
-
-                    // Add classes for styling
-                    if (date.getMonth() !== this.currentDate.getMonth()) {
-                        dayElement.classList.add('other-month');
-                    }
-
-                    if (this.isSameDay(date, this.today)) {
-                        dayElement.classList.add('today');
-                    }
-
-                    // Add some sample events
-                    if (date.getDate() === 15 || date.getDate() === 22 || date.getDate() === 28) {
-                        dayElement.classList.add('has-event');
-                    }
-
-                    daysContainer.appendChild(dayElement);
-                }
-            }
-
-            isSameDay(date1, date2) {
-                return date1.getDate() === date2.getDate() &&
-                       date1.getMonth() === date2.getMonth() &&
-                       date1.getFullYear() === date2.getFullYear();
-            }
-        }
-
-        // Initialize calendar when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            new MiniCalendar();
-        });
-    </script>
-</body>
-</html>
-        /* Inline CSS to ensure loading */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .main-container {
-            display: flex;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(180deg, #2d5016 0%, #4CAF50 100%);
-            color: white;
-            padding: 1.5rem 0;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar-header {
-            padding: 0 1.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 1.5rem;
-        }
-
+    
+    <style>
+        /* ==========================================================================
+           TEACHER DASHBOARD CUSTOM STYLES
+           ========================================================================== */
+        
+        /* Logo Styles - UPASतिथि branding */
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.2rem;
+        }
+        
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
+        }
+        
+        .book-icon {
+            font-size: 20px;
+            color: #8B4A8B;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            line-height: 1;
+        }
+        
+        .logo-text .english {
             font-weight: 600;
-        }
-
-        .logo i {
-            font-size: 1.5rem;
-            color: #FFE082;
-        }
-
-        .sidebar-nav h3 {
-            padding: 0 1.5rem;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
+            font-size: 1.1rem;
+            color: #fff;
             letter-spacing: 0.5px;
         }
-
-        .sidebar-nav ul {
-            list-style: none;
-            margin-bottom: 2rem;
+        
+        .logo-text .hindi {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #fff;
+            font-family: 'Noto Sans Devanagari', sans-serif;
         }
-
-        .nav-item {
+        
+        /* Main Content Header - Notification Bell Container */
+        .main-content-header {
             display: flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
+            justify-content: flex-end;
+            padding: 20px 30px 0;
+            margin-bottom: 20px;
+        }
+        
+        /* Notification Bell - Interactive bell icon with badge */
+        .notification-bell {
+            position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            gap: 0.75rem;
         }
-
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            padding-left: 2rem;
-        }
-
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.15);
-            border-right: 3px solid #FFE082;
-        }
-
-        .nav-item i {
-            width: 20px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .nav-item span {
-            font-size: 0.9rem;
-            flex-grow: 1;
-        }
-
-        .badge {
-            background: #FF6B6B;
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        /* Stats Section */
-        .stats-section {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            flex: 1;
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-card.card1 {
-            background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);
-        }
-
-        .stat-card.card2 {
-            background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);
-        }
-
-        .stat-card.card3 {
-            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
+        
+        .notification-bell i {
+            font-size: 24px;
             color: #666;
-            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
         }
-
-        .stat-change {
-            font-size: 0.85rem;
-            color: #4CAF50;
-            font-weight: 600;
+        
+        .notification-bell:hover i {
+            color: #333;
         }
-
-        .stat-icon {
+        
+        .notification-badge {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            opacity: 0.7;
-        }
-
-        /* Right Panel */
-        .right-panel {
-            width: 300px;
-            background: white;
-            padding: 1.5rem;
-            overflow-y: auto;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .profile-section {
-            text-align: center;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(76, 175, 80, 0.2);
-        }
-
-        .profile-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .profile-header span:first-child {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
             color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
-        }
-
-        .profile-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            width: 100%;
-        }
-
-        .profile-image {
-            width: 80px;
-            height: 80px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #4CAF50;
-            background: #f0f0f0;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            border: 2px solid white;
         }
-
-        .teacher-name {
-            font-weight: 700;
-            color: #333;
-            font-size: 1.2rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .teacher-id {
-            font-size: 0.9rem;
-            color: #666;
-            background: #f8f9fa;
-            padding: 0.3rem 0.8rem;
+        
+        /* Notification Dropdown - Expandable notification list */
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 350px;
+            background: white;
             border-radius: 8px;
-            border: 1px solid #e9ecef;
-            font-family: 'Courier New', monospace;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 1px solid #e0e0e0;
+            z-index: 1000;
+            display: none;
+            margin-top: 10px;
+        }
+        
+        .notification-dropdown.show {
+            display: block;
+        }
+        
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .notification-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .notification-count {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .notification-item {
+            display: flex;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f5f5f5;
+            transition: background-color 0.2s ease;
+        }
+        
+        .notification-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-icon {
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .notification-icon i {
+            font-size: 16px;
+            color: #4CAF50;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .notification-icon .fa-exclamation-triangle {
+            color: #ff9800;
+        }
+        
+        .notification-icon .fa-calendar {
+            color: #2196F3;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-content h5 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .notification-content p {
+            margin: 0 0 6px 0;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .notification-time {
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .notification-footer {
+            padding: 12px 20px;
+            border-top: 1px solid #f0f0f0;
+            text-align: center;
+        }
+        
+        .view-all-notifications {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 13px;
             font-weight: 500;
         }
-
-        /* Calendar Section */
-        .calendar-section {
-            margin-bottom: 1rem;
-        }
-
-        .calendar-widget {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .calendar-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .calendar-nav button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .calendar-nav button:hover {
-            background: #45a049;
-            transform: scale(1.1);
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.25rem;
-        }
-
-        .calendar-day-header {
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #666;
-            padding: 0.5rem 0;
-        }
-
-        .calendar-day {
-            text-align: center;
-            padding: 0.5rem;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .calendar-day:hover {
-            background: #e8f5e8;
-        }
-
-        .calendar-day.today {
-            background: #4CAF50;
-            color: white;
-            font-weight: 600;
-        }
-
-        .calendar-day.other-month {
-            color: #ccc;
-        }
-
-        .calendar-day.has-event {
-            background: #FFE082;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .activity-illustration {
-            display: none;
-        }
-
-        /* Mini Calendar */
-        .calendar-section {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(76, 175, 80, 0.2);
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .calendar-header h3 {
-            color: #333;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .calendar-nav button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .calendar-nav button:hover {
-            background: #45a049;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.25rem;
-        }
-
-        .calendar-day-header {
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #666;
-            padding: 0.5rem 0.25rem;
-        }
-
-        .calendar-day {
-            text-align: center;
-            padding: 0.5rem 0.25rem;
-            font-size: 0.85rem;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            color: #333;
-        }
-
-        .calendar-day:hover {
-            background: #E8F5E8;
-            color: #4CAF50;
-        }
-
-        .calendar-day.today {
-            background: #4CAF50;
-            color: white;
-            font-weight: 600;
-        }
-
-        .calendar-day.other-month {
-            color: #ccc;
-        }
-
-        .calendar-day.has-event {
-            position: relative;
-        }
-
-        .calendar-day.has-event::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background: #FF6B6B;
-            border-radius: 50%;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-            
-            .right-panel {
-                width: 100%;
-            }
-            
-            .main-content {
-                width: 100%;
-                padding: 1rem;
-            }
-            
-            .stats-section {
-                flex-direction: column;
-            }
+        
+        .view-all-notifications:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -711,8 +224,13 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                
-                    <span>Upasthiti</span>
+                    <div class="logo-icon">
+                        <i class="fas fa-book book-icon"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="english">UPAS</span>
+                        <span class="hindi">तिथि</span>
+                    </div>
                 </div>
             </div>
             
@@ -720,25 +238,20 @@
                 <h3>Home</h3>
                 <ul>
                     <li class="nav-item active">
-                        
+                        <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </li>
-                    <li class="nav-item">
-                        
-                        <span>Report Overview</span>
-                        
+                </ul>
+
+                <h3>Attendance</h3>
+                <ul>
+                    <li class="nav-item" onclick="window.location.href='mark-attendance.html'">
+                        <i class="fas fa-user-check"></i>
+                        <span>Mark Attendance</span>
                     </li>
-                    <li class="nav-item">
-                        
-                        <span>Images</span>
-                    </li>
-                    <li class="nav-item">
-                        
-                        <span>Manage Task</span>
-                    </li>
-                    <li class="nav-item">
-                        
-                        <span>Settings</span>
+                    <li class="nav-item" onclick="window.location.href='update-attendance.html'">
+                        <i class="fas fa-edit"></i>
+                        <span>Update Attendance</span>
                     </li>
                 </ul>
             </nav>
@@ -746,26 +259,177 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Stats Cards -->
-            <div class="stats-section">
-                <div class="stat-card card1">
-                    <div class="stat-number">20</div>
-                    <div class="stat-label">Active projects</div>
-                    <div class="stat-change">+4,301</div>
-                    <div class="stat-icon">📊</div>
+            <!-- Main Content Header -->
+            <div class="main-content-header">
+                <div class="notification-bell" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h4>Notifications</h4>
+                            <span class="notification-count">(3)</span>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h5>System Update</h5>
+                                    <p>New attendance features have been added to the system</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h5>Class Reminder</h5>
+                                    <p>Don't forget to mark attendance for Class 10-A today</p>
+                                    <span class="notification-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <h5>Schedule Change</h5>
+                                    <p>Mathematics class for 9-B has been rescheduled to 11:00 AM</p>
+                                    <span class="notification-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-notifications">View All Notifications</a>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="stat-card card2">
-                    <div class="stat-number">58</div>
-                    <div class="stat-label">Ongoing tasks</div>
-                    <div class="stat-change">78%</div>
-                    <div class="stat-icon">💻</div>
+            </div>
+            
+            <!-- Quick Actions Section -->
+            <div class="quick-actions-section">
+                <h2 class="section-heading">Quick Actions</h2>
+                <div class="action-cards">
+                    <div class="action-card mark-attendance" onclick="window.location.href='mark-attendance.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Mark Attendance</h3>
+                            <p>Record student attendance for today's classes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card update-attendance" onclick="window.location.href='update-attendance.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Update Attendance</h3>
+                            <p>Modify existing attendance records</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card notice" onclick="window.location.href='notices.html'">
+                        <div class="action-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Notice</h3>
+                            <p>Create and manage notices for students</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="stat-card card3">
-                    <div class="stat-number">4h 28m</div>
-                    <div class="stat-label">Total hours</div>
-                    <div class="stat-icon">⏰</div>
+            </div>
+
+            <!-- My Classes Timetable Section -->
+            <div class="timetable-section">
+                <h2 class="section-heading">My Classes</h2>
+                <div class="timetable-container">
+                    <div class="date-navigation">
+                        <button class="nav-btn" id="prev-day">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="current-date" id="current-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span id="date-display">September 24, 2025</span>
+                        </div>
+                        <button class="nav-btn" id="next-day">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="day-schedule">
+                        <div class="day-label">Tuesday</div>
+                        
+                        <div class="classes-list">
+                            <div class="class-item">
+                                <div class="time-slot">
+                                    <span class="start-time">08:15</span>
+                                    <span class="dash">-</span>
+                                    <span class="end-time">09:00</span>
+                                </div>
+                                <div class="class-details">
+                                    <div class="status-indicator active"></div>
+                                    <div class="class-info">
+                                        <h4 class="subject-name">Mathematics</h4>
+                                        <p class="instructor-info">Class 10-A</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="class-item">
+                                <div class="time-slot">
+                                    <span class="start-time">09:00</span>
+                                    <span class="dash">-</span>
+                                    <span class="end-time">09:45</span>
+                                </div>
+                                <div class="class-details">
+                                    <div class="status-indicator active"></div>
+                                    <div class="class-info">
+                                        <h4 class="subject-name">Mathematics</h4>
+                                        <p class="instructor-info">Class 9-B</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="class-item">
+                                <div class="time-slot">
+                                    <span class="start-time">09:45</span>
+                                    <span class="dash">-</span>
+                                    <span class="end-time">10:30</span>
+                                </div>
+                                <div class="class-details">
+                                    <div class="status-indicator active"></div>
+                                    <div class="class-info">
+                                        <h4 class="subject-name">Mathematics</h4>
+                                        <p class="instructor-info">Class 8-C</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="class-item">
+                                <div class="time-slot">
+                                    <span class="start-time">10:30</span>
+                                    <span class="dash">-</span>
+                                    <span class="end-time">11:15</span>
+                                </div>
+                                <div class="class-details">
+                                    <div class="status-indicator active"></div>
+                                    <div class="class-info">
+                                        <h4 class="subject-name">Mathematics</h4>
+                                        <p class="instructor-info">Class 9-A</p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -800,16 +464,69 @@
                     <div class="calendar-day-header">T</div>
                     <div class="calendar-day-header">F</div>
                     <div class="calendar-day-header">S</div>
-                    <!-- Calendar days will be generated by JavaScript -->
                 </div>
                 <div class="calendar-days" id="calendar-days"></div>
             </div>
         </aside>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/notifications.js"></script>
     <script>
+        /* ==========================================================================
+           TEACHER DASHBOARD JAVASCRIPT FUNCTIONALITY
+           ========================================================================== */
+        
+        // Notification Dropdown Functionality
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const notificationBell = document.querySelector('.notification-bell');
+            const dropdown = document.getElementById('notificationDropdown');
+            
+            if (notificationBell && !notificationBell.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Timetable Navigation Functionality
+        function initializeTimetable() {
+            const prevDayBtn = document.getElementById('prev-day');
+            const nextDayBtn = document.getElementById('next-day');
+            const dateDisplay = document.getElementById('date-display');
+            const dayLabel = document.querySelector('.day-label');
+            
+            let currentDate = new Date();
+            
+            function updateTimetable() {
+                const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                               'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                const dayName = dayNames[currentDate.getDay()];
+                const monthName = monthNames[currentDate.getMonth()];
+                const day = currentDate.getDate();
+                const year = currentDate.getFullYear();
+                
+                dateDisplay.textContent = `${monthName} ${day}, ${year}`;
+                dayLabel.textContent = dayName;
+            }
+            
+            prevDayBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() - 1);
+                updateTimetable();
+            });
+            
+            nextDayBtn.addEventListener('click', () => {
+                currentDate.setDate(currentDate.getDate() + 1);
+                updateTimetable();
+            });
+            
+            updateTimetable();
+        }
+
         // Mini Calendar Functionality
         class MiniCalendar {
             constructor() {
@@ -841,43 +558,35 @@
                     'July', 'August', 'September', 'October', 'November', 'December'
                 ];
 
-                // Update header
-                const monthYear = document.getElementById('calendar-month-year');
-                monthYear.textContent = `${monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+                document.getElementById('calendar-month-year').textContent = 
+                    monthNames[this.currentDate.getMonth()] + ' ' + this.currentDate.getFullYear();
 
-                // Get first day of month and number of days
                 const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
                 const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
-                const startDate = new Date(firstDay);
-                startDate.setDate(startDate.getDate() - firstDay.getDay());
+                const daysInMonth = lastDay.getDate();
+                const startingDayOfWeek = firstDay.getDay();
 
-                // Generate calendar days
-                const daysContainer = document.getElementById('calendar-days');
-                daysContainer.innerHTML = '';
+                const calendarDays = document.getElementById('calendar-days');
+                calendarDays.innerHTML = '';
 
-                for (let i = 0; i < 42; i++) {
-                    const date = new Date(startDate);
-                    date.setDate(startDate.getDate() + i);
+                // Add empty cells for days before the first day of the month
+                for (let i = 0; i < startingDayOfWeek; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('calendar-day', 'empty');
+                    calendarDays.appendChild(emptyDay);
+                }
 
+                // Add days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
                     const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day';
-                    dayElement.textContent = date.getDate();
-
-                    // Add classes for styling
-                    if (date.getMonth() !== this.currentDate.getMonth()) {
-                        dayElement.classList.add('other-month');
-                    }
-
-                    if (this.isSameDay(date, this.today)) {
+                    dayElement.classList.add('calendar-day');
+                    dayElement.textContent = day;
+                    
+                    if (this.isSameDay(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day), this.today)) {
                         dayElement.classList.add('today');
                     }
-
-                    // Add some sample events
-                    if (date.getDate() === 15 || date.getDate() === 22 || date.getDate() === 28) {
-                        dayElement.classList.add('has-event');
-                    }
-
-                    daysContainer.appendChild(dayElement);
+                    
+                    calendarDays.appendChild(dayElement);
                 }
             }
 
@@ -888,9 +597,25 @@
             }
         }
 
-        // Initialize calendar when DOM is loaded
+        // Initialize current date immediately
+        function updateCurrentDate() {
+            const today = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            const dateSpan = document.getElementById('date-display');
+            if (dateSpan) {
+                dateSpan.textContent = today.toLocaleDateString('en-US', options);
+            }
+        }
+
+        // Initialize all functionality when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentDate();
             new MiniCalendar();
+            initializeTimetable();
         });
     </script>
 </body>

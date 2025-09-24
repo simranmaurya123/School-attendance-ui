@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Attendance Buttons</title>
+    <style>
+        .attendance-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin: 20px;
+        }
+
+        .attendance-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attendance-btn.present {
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .attendance-btn.present.active {
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .attendance-btn.leave {
+            border-color: #ff9800;
+            color: #ff9800;
+        }
+
+        .attendance-btn.leave.active {
+            background: #ff9800;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+
+        .attendance-btn.absent {
+            border-color: #f44336;
+            color: #f44336;
+        }
+
+        .attendance-btn.absent.active {
+            background: #f44336;
+            color: white;
+            box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+        }
+
+        .attendance-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .student-item {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test P-L-A Buttons</h1>
+    
+    <div class="student-item">
+        <h3>Student 1: John Doe</h3>
+        <div class="attendance-actions">
+            <button class="attendance-btn present" onclick="markAttendance(1, 'present')" title="Present">
+                P
+            </button>
+            <button class="attendance-btn leave" onclick="markAttendance(1, 'leave')" title="Leave">
+                L
+            </button>
+            <button class="attendance-btn absent" onclick="markAttendance(1, 'absent')" title="Absent">
+                A
+            </button>
+        </div>
+        <p id="status1">Status: Not marked</p>
+    </div>
+
+    <div class="student-item">
+        <h3>Student 2: Jane Smith</h3>
+        <div class="attendance-actions">
+            <button class="attendance-btn present" onclick="markAttendance(2, 'present')" title="Present">
+                P
+            </button>
+            <button class="attendance-btn leave" onclick="markAttendance(2, 'leave')" title="Leave">
+                L
+            </button>
+            <button class="attendance-btn absent" onclick="markAttendance(2, 'absent')" title="Absent">
+                A
+            </button>
+        </div>
+        <p id="status2">Status: Not marked</p>
+    </div>
+
+    <script>
+        let attendance = {};
+
+        function markAttendance(studentId, status) {
+            attendance[studentId] = status;
+            
+            // Clear all active states for this student
+            const studentButtons = document.querySelectorAll(`[onclick*="markAttendance(${studentId}"]`);
+            studentButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active state to clicked button
+            event.target.classList.add('active');
+            
+            // Update status text
+            document.getElementById(`status${studentId}`).textContent = `Status: ${status.charAt(0).toUpperCase() + status.slice(1)}`;
+            
+            console.log('Attendance:', attendance);
+        }
+    </script>
+</body>
+</html>

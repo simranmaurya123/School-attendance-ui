@@ -54,7 +54,7 @@ const CalendarPage = () => {
       <main className="main-content">
         <header className="page-header">
           <nav className="breadcrumb">
-            <a href="/">🏠 Home</a>
+            <a href="/"> Home</a>
             <span>›</span>
             <span>Calendar</span>
           </nav>

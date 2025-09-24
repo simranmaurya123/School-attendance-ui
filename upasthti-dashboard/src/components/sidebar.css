@@ -8,7 +8,35 @@
 
 .logo {
     margin-bottom: 2rem;
-    color: var(--primary-color);
+    text-align: center;
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    gap: 0.3rem;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+    color: #6366f1;
+    margin-right: 0.2rem;
+}
+
+.logo-upas {
+    color: #6366f1;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    margin-right: 0.1rem;
+}
+
+.logo-tithi {
+    color: #6366f1;
+    font-family: 'Devanagari', 'Noto Sans Devanagari', sans-serif;
+    font-weight: 600;
 }
 
 .nav-links {

@@ -14,7 +14,11 @@ const Sidebar = () => {
   return (
     <nav className="sidebar">
       <div className="logo">
-        <h2>Upasthiti</h2>
+        <span className="logo-text">
+          <span className="logo-icon">📔</span>
+          <span className="logo-upas">UPAS</span>
+          <span className="logo-tithi">थिति</span>
+        </span>
       </div>
       <ul className="nav-links">
         {navItems.map((item) => (

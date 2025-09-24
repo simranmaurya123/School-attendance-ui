@@ -34,19 +34,28 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255,255,255,0.2);
+            background: #4CAF50;
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 25px;
             transition: all 0.3s ease;
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .back-button svg {
+            flex-shrink: 0;
+            filter: brightness(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.2));
         }
 
         .back-button:hover {
-            background: rgba(255,255,255,0.3);
+            background: #45a049;
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
         }
 
         .class-info {
@@ -265,14 +274,18 @@
         }
 
         .attendance-btn {
-            padding: 8px 16px;
+            width: 40px;
+            height: 40px;
             border: 2px solid;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .attendance-btn.present {
@@ -283,6 +296,7 @@
         .attendance-btn.present.active {
             background: #4CAF50;
             color: white;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
         }
 
         .attendance-btn.absent {
@@ -293,6 +307,18 @@
         .attendance-btn.absent.active {
             background: #f44336;
             color: white;
+            box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+        }
+
+        .attendance-btn.leave {
+            border-color: #ff9800;
+            color: #ff9800;
+        }
+
+        .attendance-btn.leave.active {
+            background: #ff9800;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
         }
 
         .attendance-btn:hover {
@@ -347,6 +373,37 @@
             display: inline-block;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #4CAF50;
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+
+        .notification.info {
+            background: #2196F3;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -391,8 +448,8 @@
 </head>
 <body>
     <div class="container">
-        <a href="attendance.html" class="back-button">
-            Back to Classes
+        <a href="index.html" class="back-button">
+            Home → Mark Attendance
         </a>
 
         <div class="header">
@@ -422,6 +479,9 @@
                     <button class="btn btn-danger" onclick="markAllAbsent()">
                         Mark All Absent
                     </button>
+                    <button class="btn btn-secondary" onclick="markAllLeave()" style="background: #ff9800;">
+                        Mark All Leave
+                    </button>
                     <button class="btn btn-secondary" onclick="clearAll()">
                         Clear All
                     </button>
@@ -436,6 +496,10 @@
                 <div class="stat-card">
                     <span class="stat-number" id="absentCount">0</span>
                     <div class="stat-label">Absent</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="leaveCount">0</span>
+                    <div class="stat-label">Leave</div>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" id="pendingCount">0</span>
@@ -545,12 +609,16 @@
                     </div>
                     <div class="attendance-actions">
                         <button class="attendance-btn present ${attendanceData[student.id] === 'present' ? 'active' : ''}" 
-                                onclick="markAttendance(${student.id}, 'present')">
-                            Present
+                                onclick="markAttendance(${student.id}, 'present')" title="Present">
+                            P
                         </button>
                         <button class="attendance-btn absent ${attendanceData[student.id] === 'absent' ? 'active' : ''}" 
-                                onclick="markAttendance(${student.id}, 'absent')">
-                            Absent
+                                onclick="markAttendance(${student.id}, 'absent')" title="Absent">
+                            A
+                        </button>
+                        <button class="attendance-btn leave ${attendanceData[student.id] === 'leave' ? 'active' : ''}" 
+                                onclick="markAttendance(${student.id}, 'leave')" title="Leave">
+                            L
                         </button>
                     </div>
                 </div>
@@ -582,6 +650,15 @@
             updateSaveStatus();
         }
 
+        function markAllLeave() {
+            studentsData.forEach(student => {
+                attendanceData[student.id] = 'leave';
+            });
+            updateStats();
+            renderStudents(document.getElementById('searchStudents').value);
+            updateSaveStatus();
+        }
+
         function clearAll() {
             studentsData.forEach(student => {
                 attendanceData[student.id] = 'pending';
@@ -594,10 +671,12 @@
         function updateStats() {
             const present = Object.values(attendanceData).filter(status => status === 'present').length;
             const absent = Object.values(attendanceData).filter(status => status === 'absent').length;
+            const leave = Object.values(attendanceData).filter(status => status === 'leave').length;
             const pending = Object.values(attendanceData).filter(status => status === 'pending').length;
 
             document.getElementById('presentCount').textContent = present;
             document.getElementById('absentCount').textContent = absent;
+            document.getElementById('leaveCount').textContent = leave;
             document.getElementById('pendingCount').textContent = pending;
         }
 
@@ -645,6 +724,7 @@
                         total: studentsData.length,
                         present: Object.values(attendanceData).filter(status => status === 'present').length,
                         absent: Object.values(attendanceData).filter(status => status === 'absent').length,
+                        leave: Object.values(attendanceData).filter(status => status === 'leave').length,
                         rate: Math.round((Object.values(attendanceData).filter(status => status === 'present').length / studentsData.length) * 100)
                     }
                 };
@@ -658,12 +738,50 @@
                 saveText.textContent = 'Saved Successfully!';
                 saveLoading.classList.remove('active');
                 
+                // Show success message without redirecting
                 setTimeout(() => {
-                    // Redirect back to dashboard
-                    window.location.href = 'teacher-dashboard.html';
+                    saveBtn.disabled = false;
+                    saveText.textContent = 'Save Attendance';
+                    
+                    // Show temporary success notification
+                    showNotification('Attendance saved successfully!', 'success');
                 }, 1500);
                 
             }, 2000); // Simulate network delay
+        }
+
+        function goToDashboard() {
+            if (confirm('Are you sure you want to go back to dashboard? Any unsaved changes will be lost.')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notif => notif.remove());
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
         }
 
         // Search functionality

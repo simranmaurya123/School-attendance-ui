@@ -106,6 +106,16 @@
             transition: all 0.3s ease;
         }
 
+        .date-filter {
+            background: #f8f9fa;
+            border-color: #4CAF50 !important;
+        }
+
+        .date-filter:focus {
+            border-color: #4CAF50 !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important;
+        }
+
         .search-box {
             flex: 1;
             min-width: 250px;
@@ -275,7 +285,7 @@
 <body>
     <div class="container">
         <div class="breadcrumb-container">
-            <div class="breadcrumb-box" onclick="window.location.href='teacher-dashboard.html'">
+            <div class="breadcrumb-box" onclick="window.location.href='index.html'">
                 <span>Home → Update Attendance</span>
             </div>
         </div>
@@ -288,7 +298,7 @@
         <div class="search-section">
             <div class="search-controls">
                 <input type="text" class="search-box" placeholder="Search by class name..." id="searchRecords">
-                <input type="date" class="date-filter" id="dateFilter">
+                <input type="date" class="date-filter" id="dateFilter" title="Filter by specific date">
                 <select class="class-filter" id="classFilter">
                     <option value="">All Classes</option>
                     <option value="class_10a_math">Class 10-A Mathematics</option>
