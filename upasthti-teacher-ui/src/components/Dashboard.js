@@ -30,6 +30,7 @@ const Dashboard = () => {
     }
   ]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const todayClasses = [
     {
@@ -146,20 +147,10 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Today's Classes */}
+      {/* My Classes */}
       <section className="todays-classes">
-        <h2>Today's Classes</h2>
+        <h2>My Classes</h2>
         <div className="classes-container">
-          <div className="date-header">
-            <i className="fas fa-calendar-alt"></i>
-            <span>{new Date().toLocaleDateString('en-US', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}</span>
-          </div>
-          
           <div className="classes-list">
             {todayClasses.map(classItem => (
               <div key={classItem.id} className="class-item">

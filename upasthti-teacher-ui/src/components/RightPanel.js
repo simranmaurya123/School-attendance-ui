@@ -123,38 +123,6 @@ const RightPanel = () => {
       {/* Mini Calendar Section */}
       <section className="calendar-section">
         <div className="calendar-card">
-          {/* Selected Date Display */}
-          <div className="selected-date-display">
-            <div className="selected-date-text">{getSelectedDateString()}</div>
-            <div className="date-nav-buttons">
-              <button 
-                className="date-nav-btn prev-day" 
-                onClick={() => navigateDay(-1)}
-                title="Previous Day"
-              >
-                <i className="fas fa-chevron-left"></i>
-              </button>
-              <button 
-                className="date-nav-btn today-btn" 
-                onClick={() => {
-                  const today = new Date();
-                  setSelectedDate(today);
-                  setCalendarDate(new Date(today.getFullYear(), today.getMonth(), 1));
-                }}
-                title="Today"
-              >
-                Today
-              </button>
-              <button 
-                className="date-nav-btn next-day" 
-                onClick={() => navigateDay(1)}
-                title="Next Day"
-              >
-                <i className="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-
           {/* Month Navigation */}
           <div className="calendar-header">
             <h4>{getMonthYearString()}</h4>
